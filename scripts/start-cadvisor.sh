@@ -11,8 +11,10 @@ start_cadvisor() {
     echo "Starting cAdvisor ..."
     echo
 
-    exec cadvisor -logtostderr
+    exec cadvisor \
+        -logtostderr \
+        "$@"
 }
 
 set_umask
-start_cadvisor
+start_cadvisor "$@"
