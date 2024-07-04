@@ -41,6 +41,7 @@ RUN --mount=type=bind,target=/scripts,from=with-scripts,source=/scripts \
     && ln -sf /opt/cadvisor-${CADVISOR_VERSION:?} /opt/cadvisor \
     && cp /tmp/cadvisor/cadvisor-${CADVISOR_VERSION:?}-linux-${PKG_ARCH:?} /opt/cadvisor/ \
     && chmod +x /opt/cadvisor/cadvisor-${CADVISOR_VERSION:?}-linux-${PKG_ARCH:?} \
+    && setcap cap_syslog=+ep /opt/cadvisor/cadvisor-${CADVISOR_VERSION:?}-linux-${PKG_ARCH:?} \
     && ln -sf /opt/cadvisor/cadvisor-${CADVISOR_VERSION:?}-linux-${PKG_ARCH:?} /opt/bin/cadvisor \
     # Copy the start-cadvisor.sh script. \
     && cp /scripts/start-cadvisor.sh /opt/cadvisor/ \
