@@ -33,7 +33,7 @@ start_cadvisor() {
         --inh=cap_syslog \
         --addamb=cap_syslog \
         -- \
-        -c cadvisor -logtostderr "$@"
+        -c "cadvisor -logtostderr $@"
 }
 
 set_umask
