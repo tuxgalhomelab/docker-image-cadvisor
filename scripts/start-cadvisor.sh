@@ -23,6 +23,21 @@ validate_prereqs() {
     fi
 }
 
+# We do this to allow the docker socket to be accessible as the
+# non-root cadvisor user.
+add_cadvisor_user_to_docker_group() {
+    if [ -S /var/run/docker.sock ]; then
+        local host_docker_gid=$(stat -c '%g' /var/run/docker.sock)
+        echo "Creating group 'docker' with gid '${host_docker_gid:?}'"
+        groupadd --gid ${host_docker_gid:?} docker
+        echo "Adding user 'cadvisor' to the group 'docker'"
+        usermod --append --groups ${host_docker_gid:?} cadvisor
+    else
+        echo "/var/run/docker.sock was not volume mounted! Exiting ..."
+        exit 1
+    fi
+}
+
 start_cadvisor() {
     echo "Starting cAdvisor ..."
     echo
@@ -38,4 +53,5 @@ start_cadvisor() {
 
 set_umask
 validate_prereqs
+add_cadvisor_user_to_docker_group
 start_cadvisor "$@"

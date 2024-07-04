@@ -45,6 +45,7 @@ test_start_container() {
         --name ${container_name:?} \
         --detach \
         --rm \
+        --volume /var/run:/var/run:ro \
         --publish 127.0.0.1:8082:8080 \
         ${IMAGE:?}
 }
