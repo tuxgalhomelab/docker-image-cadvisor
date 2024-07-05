@@ -42,7 +42,6 @@ RUN --mount=type=bind,target=/scripts,from=with-scripts,source=/scripts \
 # Expose the HTTP server port used by cAdvisor.
 EXPOSE 8080
 
-# Use the healthcheck command part of cadvisor as the health checker.
 HEALTHCHECK --start-period=1m --interval=30s --timeout=3s CMD curl --silent --fail --location --show-error http://localhost:8080/healthz
 
 CMD ["start-cadvisor"]
