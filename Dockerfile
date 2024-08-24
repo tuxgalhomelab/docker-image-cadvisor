@@ -42,7 +42,14 @@ RUN --mount=type=bind,target=/scripts,from=with-scripts,source=/scripts \
 # Expose the HTTP server port used by cAdvisor.
 EXPOSE 8080
 
-HEALTHCHECK --start-period=1m --interval=30s --timeout=3s CMD curl --silent --fail --location --show-error http://localhost:8080/healthz
+HEALTHCHECK \
+    --start-period=15s --interval=30s --timeout=3s \
+    CMD curl \
+        --silent \
+        --fail \
+        --location \
+        --show-error \
+        http://localhost:8080/healthz
 
 CMD ["start-cadvisor"]
 STOPSIGNAL SIGTERM
