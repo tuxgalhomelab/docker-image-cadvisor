@@ -17,6 +17,7 @@ ARG CADVISOR_VERSION
 # hadolint ignore=DL4006,SC2086
 RUN --mount=type=bind,target=/scripts,from=with-scripts,source=/scripts \
     set -E -e -o pipefail \
+    && export HOMELAB_VERBOSE=y \
     # Download and install the release. \
     && mkdir -p /tmp/cadvisor \
     && PKG_ARCH="$(dpkg --print-architecture)" \
