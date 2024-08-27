@@ -24,6 +24,7 @@ RUN --mount=type=bind,target=/scripts,from=with-scripts,source=/scripts \
         --silent \
         --fail \
         --location \
+        --show-error \
         --remote-name \
         --output-dir /tmp/cadvisor https://github.com/google/cadvisor/releases/download/${CADVISOR_VERSION:?}/cadvisor-${CADVISOR_VERSION:?}-linux-${PKG_ARCH:?} \
     && mkdir -p /opt/cadvisor-${CADVISOR_VERSION:?} \
