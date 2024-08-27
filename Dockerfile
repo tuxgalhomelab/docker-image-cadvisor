@@ -42,12 +42,7 @@ EXPOSE 8080
 
 HEALTHCHECK \
     --start-period=15s --interval=30s --timeout=3s \
-    CMD curl \
-        --silent \
-        --fail \
-        --location \
-        --show-error \
-        http://localhost:8080/healthz
+    CMD homelab healthcheck-service http://localhost:8080/healthz
 
 CMD ["start-cadvisor"]
 STOPSIGNAL SIGTERM
