@@ -21,13 +21,9 @@ RUN --mount=type=bind,target=/scripts,from=with-scripts,source=/scripts \
     # Download and install the release. \
     && mkdir -p /tmp/cadvisor \
     && PKG_ARCH="$(dpkg --print-architecture)" \
-    && curl \
-        --silent \
-        --fail \
-        --location \
-        --show-error \
-        --remote-name \
-        --output-dir /tmp/cadvisor https://github.com/google/cadvisor/releases/download/${CADVISOR_VERSION:?}/cadvisor-${CADVISOR_VERSION:?}-linux-${PKG_ARCH:?} \
+    && homelab download-file-to \
+        https://github.com/google/cadvisor/releases/download/${CADVISOR_VERSION:?}/cadvisor-${CADVISOR_VERSION:?}-linux-${PKG_ARCH:?} \
+        /tmp/cadvisor \
     && mkdir -p /opt/cadvisor-${CADVISOR_VERSION:?} \
     && ln -sf /opt/cadvisor-${CADVISOR_VERSION:?} /opt/cadvisor \
     && cp /tmp/cadvisor/cadvisor-${CADVISOR_VERSION:?}-linux-${PKG_ARCH:?} /opt/cadvisor/ \
