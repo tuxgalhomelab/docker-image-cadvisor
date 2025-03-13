@@ -1,3 +1,5 @@
 BASE_IMAGE_NAME=tuxgal/homelab-base
 BASE_IMAGE_TAG=master
+GO_IMAGE_NAME=tuxgal/homelab-go
+GO_IMAGE_TAG=0.2.2-go-1.24.1
 CADVISOR_VERSION=v0.52.1
